@@ -6,7 +6,7 @@ import load from 'load-json-file'
 import polygonClipping from '../main'
 
 /** USE ME TO RUN ONLY ONE TEST **/
-const targetOnly = ''
+const targetOnly = 'issue-37'
 const opOnly = ''
 
 /** USE ME TO SKIP TESTS **/

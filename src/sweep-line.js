@@ -63,6 +63,12 @@ export default class SweepLine {
           }
         }
       }
+      if (newEvents.length > 0) {
+        console.log(`evt: [${event.point.x}, ${event.point.y}]`)
+        console.log(`this Seg: [${event.segment.leftSE.point.x}, ${event.segment.leftSE.point.y}] ==> [${event.segment.rightSE.point.x}, ${event.segment.rightSE.point.y}]`)
+        console.log(`nextSeg: [${nextSeg.leftSE.point.x}, ${nextSeg.leftSE.point.y}] ==> [${nextSeg.rightSE.point.x}, ${nextSeg.rightSE.point.y}]`)
+        console.log(`#NewEvents b: ${newEvents.length}`)
+      }
 
       // did we get some intersections?
       if (newEvents.length > 0 || mySplitters.length > 0) {
@@ -75,10 +81,12 @@ export default class SweepLine {
             newEvents.push(newEventsFromSplit[i])
           }
         }
+        if (newEvents.length > 0) console.log(`#NewEvents: ${newEvents.length}`)
 
         // Make sure sweep line ordering is totally consistent for later
         // use with the segment 'prev' pointers - re-do the current event.
         newEvents.push(event)
+        if (newEvents.length > 0) console.log(`#NewEvents: ${newEvents.length}`)
       } else {
         this.segments.push(segment)
         segment.registerPrev(prevSeg)
@@ -113,7 +121,14 @@ export default class SweepLine {
       const evt = newEvents[i]
       if (! evt.isOrientationCorrect) evt.segment.swapEvents()
     }
+    if (newEvents.length > 0) console.log(`#NewEvents: ${newEvents.length}`)
 
+    if (newEvents.length > 0) {
+      console.log(`#NewEvents: ${newEvents.length}`)
+      newEvents.forEach(evt => {
+        console.log(`    new evt: ${evt.isLeft ? 'left ' : 'right'} [${evt.point.x}, ${evt.point.y}]`)
+      })
+    }
     return newEvents
   }
 

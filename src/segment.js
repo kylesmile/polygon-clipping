@@ -197,7 +197,12 @@ export default class Segment {
 
     // general case of one intersection between non-overlapping segments
     const pt = intersection(this.leftSE.point, this.vector, other.leftSE.point, other.vector)
-    if (pt !== null && isInBbox(bboxOverlap, pt)) return [pt]
+    if (pt !== null && isInBbox(bboxOverlap, pt)) {
+      console.log(`getIntersections() thisSeg: [${this.leftSE.point.x}, ${this.leftSE.point.y}] -> [${this.rightSE.point.x}, ${this.rightSE.point.y}]`)
+      console.log(`getIntersections() other: [${other.leftSE.point.x}, ${other.leftSE.point.y}] -> [${other.rightSE.point.x}, ${other.rightSE.point.y}]`)
+      console.log(`getIntersections() pt: [${pt.x}, ${pt.y}]`)
+      return [pt]
+    }
     return []
   }
 

@@ -46,6 +46,13 @@ export default function doIt (operationType, geom, moreGeoms) {
     }
   }
 
+  sweepLine.segments.forEach(seg => {
+    console.log(`Seg ${seg.isInResult ? 'in ' : 'out'}: [${seg.leftSE.point.x}, ${seg.leftSE.point.y}] --> [${seg.rightSE.point.x}, ${seg.rightSE.point.y}]`)
+    if (seg.leftSE.point.x === 0.5239850000000027 && seg.rightSE.point.x === 0.52401) {
+      console.log(`    Seg.prev ${seg.prev.isInResult ? 'in ' : 'out'}: [${seg.prev.leftSE.point.x}, ${seg.prev.leftSE.point.y}] --> [${seg.prev.rightSE.point.x}, ${seg.prev.rightSE.point.y}]`)
+    }
+  })
+
   /* Collect and compile segments we're keeping into a multipolygon */
   const ringsOut = geomOut.RingOut.factory(sweepLine.segments)
   const result = new geomOut.MultiPolyOut(ringsOut)
